@@ -39,7 +39,7 @@ const reducer = (state = initialState, action) => {
     case SET_ERROR:
       return {
         ...state,
-        error: "form is not completed",
+        error: "name, position, and nickname is required",
       };
 
     default:
