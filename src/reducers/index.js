@@ -1,9 +1,51 @@
+import { START, SUCCESS, FAIL, ADD_SMURF, SET_ERROR } from "../actions";
 
 export const initialState = {
-}
+  smurfs: [],
+  loading: false,
+  error: "",
+};
 
-const reducer = ()=>{
-}
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+        loading: false,
+        error: "",
+      };
+    case FAIL:
+      return {
+        ...state,
+        smurfs: {},
+        loading: false,
+        error: action.payload,
+      };
+    case ADD_SMURF:
+      const newSmurf = {
+        ...action.payload,
+        id: Date.now(),
+      };
+      return {
+        ...state,
+        smurfs: [...state.smurfs, newSmurf],
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: "form is not completed",
+      };
+
+    default:
+      return state;
+  }
+};
 
 //**************DO NOT EDIT ANY CODE BEYOND THIS POINT**************//
 export default reducer;
